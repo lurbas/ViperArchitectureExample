@@ -2,6 +2,7 @@
 <resources>
     <item name="primary" type="color">#EEEEEE</item>
     <item name="primary_dark" type="color">#BDBDBD</item>
-    <item name="background" type="color">#EEEEEE</item>
+    <item name="background" type="color">#FAFAFA</item>
     <item name="accent" type="color">#00BCD4</item>
+    <item name="toolbar_icon" type="color">#8A000000</item>
 </resources>

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
@@ -25,9 +26,27 @@ android {
             applicationId = "com.lucasurbas.search.fivehundredpx"
         }
     }
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.0.0'
+    compile 'com.android.support:recyclerview-v7:23.0.0'
+    compile 'com.android.support:palette-v7:23.0.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'frankiesardo:icepick:3.0.2'
+    compile 'com.hannesdorfmann.mosby:core:1.3.0'
+    compile 'com.hannesdorfmann.mosby:mvp:1.3.0'
+    compile 'com.hannesdorfmann.mosby:viewstate:1.3.0'
+    compile 'com.squareup.dagger:dagger:1.2.2'
+    apt 'com.squareup.dagger:dagger-compiler:1.2.2'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.okhttp:okhttp:2.3.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'io.realm:realm-android:0.82.1'
+    compile 'com.github.florent37:picassopalette:1.0.2@aar'
 }

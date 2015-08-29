@@ -1,3 +1,9 @@
 <resources>
+
     <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+
+    <string name="error_connection">Connection Error</string>
+    <string name="t_no_desc">No description</string>
+
 </resources>
