@@ -48,10 +48,10 @@ public class PhotoParcel implements Parcelable {
     }
 
     private void readFromParcel(Parcel in){
-        photo = new Photo();
-        photo.setId(in.readLong());
-        photo.setDescription(in.readString());
-        photo.setImageUrl(in.readString());
-        photo.setUrl(in.readString());
+        this.photo = new Photo();
+        this.photo.setId(in.readLong());
+        this.photo.setDescription(in.readString());
+        this.photo.setImageUrl(in.readString());
+        this.photo.setUrl(in.readString());
     }
 }
