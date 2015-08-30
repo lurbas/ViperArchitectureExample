@@ -14,13 +14,13 @@ public class DetailViewState implements RestoreableViewState<DetailView> {
     private final String KEY_ITEM = "key_item";
     private final String KEY_FAVOURITE = "key_favourite";
 
-    private SearchItemParcel item;
+    private SearchItemParcel searchItemParcel;
     private boolean isFavourite;
 
     @Override
     public void saveInstanceState(Bundle out) {
         out.putBoolean(KEY_FAVOURITE, isFavourite);
-        out.putParcelable(KEY_ITEM, item);
+        out.putParcelable(KEY_ITEM, searchItemParcel);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class DetailViewState implements RestoreableViewState<DetailView> {
             return null;
         }
         this.isFavourite = in.getBoolean(KEY_FAVOURITE, false);
-        this.item = in.getParcelable(KEY_ITEM);
+        this.searchItemParcel = in.getParcelable(KEY_ITEM);
         return this;
     }
 
@@ -37,11 +37,11 @@ public class DetailViewState implements RestoreableViewState<DetailView> {
     public void apply(DetailView view, boolean b) {
 
         view.showFavouriteState(isFavourite);
-        view.setItem(item.getSearchItem());
+        view.setItem(searchItemParcel.getSearchItem());
     }
 
     public void setItem(SearchItem item) {
-        this.item = new SearchItemParcel(item);
+        this.searchItemParcel = new SearchItemParcel(item);
     }
 
     public void setFavourite(boolean isFavourite) {

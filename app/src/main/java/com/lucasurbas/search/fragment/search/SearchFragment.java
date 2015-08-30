@@ -111,9 +111,9 @@ public class SearchFragment extends BaseFragment<SearchView, SearchPresenterForV
         return new SearchPresenterImpl(getActivity());
     }
 
-
     @Override
     public void showItemList(List<SearchItem> itemList) {
+        ((SearchViewState) getViewState()).setItemList(itemList);
         adapter.setItems(itemList);
     }
 
