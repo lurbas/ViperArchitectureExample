@@ -2,11 +2,11 @@ package com.lucasurbas.search;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 
-import com.lucasurbas.search.search.SearchFragment;
+import com.lucasurbas.search.architecture.BaseActivity;
+import com.lucasurbas.search.fragment.search.SearchFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

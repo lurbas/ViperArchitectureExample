@@ -1,6 +1,6 @@
 package com.lucasurbas.search.request;
 
-import com.lucasurbas.search.model.BundleProvider;
+import com.lucasurbas.search.model.SearchItemsProvider;
 
 import rx.Observable;
 
@@ -9,5 +9,5 @@ import rx.Observable;
  */
 public interface SearchApi {
 
-    Observable<? extends BundleProvider> query(String query);
+    Observable<? extends SearchItemsProvider> query(String query);
 }

@@ -29,4 +29,5 @@
             android:layout_gravity="center_horizontal"/>
 
     </FrameLayout>
+
 </LinearLayout>

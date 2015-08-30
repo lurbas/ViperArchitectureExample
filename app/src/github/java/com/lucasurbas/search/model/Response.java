@@ -1,10 +1,7 @@
 package com.lucasurbas.search.model;
 
-import android.os.Bundle;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.lucasurbas.search.constant.Keys;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,22 +9,24 @@ import java.util.List;
 /**
  * Created by Lucas on 30/08/15.
  */
-public class Response implements BundleProvider {
+public class Response implements SearchItemsProvider {
 
     @Expose
     @SerializedName("items")
     List<User> userList;
 
     @Override
-    public Bundle getBundle() {
-        ArrayList<UserParcel> list = new ArrayList<>();
-        UserParcel up;
+    public List<SearchItem> getSearchItems() {
+        ArrayList<SearchItem> list = new ArrayList<>();
+        SearchItem searchItem;
         for (User u : userList) {
-            up = new UserParcel(u);
-            list.add(up);
+            searchItem = new SearchItem();
+            searchItem.setId(u.getId());
+            searchItem.setTitle(u.getLogin());
+            searchItem.setImageUrl(u.getAvatarUrl());
+            searchItem.setWebUrl(u.getUrl());
+            list.add(searchItem);
         }
-        Bundle b = new Bundle();
-        b.putParcelableArrayList(Keys.PARCEL_USER_LIST, list);
-        return b;
+        return list;
     }
 }

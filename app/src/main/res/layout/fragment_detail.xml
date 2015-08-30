@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.lucasurbas.search.widget.FixedRatioImageView
+                android:id="@+id/iv_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:ratioHeight="1"
+                app:ratioWidth="1" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_image"
+                android:background="@color/primary"
+                android:minHeight="200dp"
+                android:paddingBottom="16dp"
+                android:paddingTop="36dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="18sp" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_favourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/iv_image"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="-28dp" />
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

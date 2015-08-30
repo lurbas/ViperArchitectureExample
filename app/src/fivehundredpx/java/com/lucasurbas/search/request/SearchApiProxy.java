@@ -2,7 +2,7 @@ package com.lucasurbas.search.request;
 
 import com.lucasurbas.search.App;
 import com.lucasurbas.search.constant.Url;
-import com.lucasurbas.search.model.BundleProvider;
+import com.lucasurbas.search.model.SearchItemsProvider;
 
 import javax.inject.Inject;
 
@@ -21,7 +21,7 @@ public class SearchApiProxy implements SearchApi {
     }
 
     @Override
-    public Observable<? extends BundleProvider> query(String query) {
+    public Observable<? extends SearchItemsProvider> query(String query) {
         return fiveHundredPxApi.query(query, Url.VALUE_CONSUMER_KEY);
     }
 }

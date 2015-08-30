@@ -4,7 +4,8 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.lucasurbas.search.adapter.ItemsAdapter;
+import com.lucasurbas.search.fragment.detail.DetailFragment;
+import com.lucasurbas.search.widget.ItemViewHolder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.Picasso;
 
@@ -21,7 +22,8 @@ import dagger.Provides;
 @Module(
         library = true,
         injects = {
-                ItemsAdapter.class
+                ItemViewHolder.class,
+                DetailFragment.class
         },
         includes = {
                 ApiModule.class

@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ll_item_container"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primary"
-    android:orientation="vertical">
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground">
 
-    <com.lucasurbas.search.widget.FixedRatioImageView
-        android:id="@+id/iv_image"
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:ratioHeight="1"
-        app:ratioWidth="1" />
+        android:background="@color/primary"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        android:textSize="16sp"
-        android:layout_margin="8dp"
-        android:singleLine="true" />
-</LinearLayout>
+        <com.lucasurbas.search.widget.FixedRatioImageView
+            android:id="@+id/iv_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:ratioHeight="1"
+            app:ratioWidth="1" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:singleLine="true"
+            tools:text="Description"
+            android:textSize="16sp" />
+    </LinearLayout>
+</FrameLayout>
