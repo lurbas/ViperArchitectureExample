@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface SearchPresenterForInteractor extends PresenterForInteractor<SearchInteractor>{
 
-    void showItemList(boolean success, List<SearchItem> itemList);
+    void showItemList(boolean success, List<SearchItem> itemList, boolean isRequested);
 }

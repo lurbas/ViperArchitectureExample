@@ -5,11 +5,11 @@ import java.util.List;
 /**
  * Created by lucas.urbas on 31/08/15.
  */
-public interface OnTableChangedListener {
+public interface OnTableChangedListener<T> {
 
     void onChanged();
 
-    <T> Class<T> getTableType();
+    Class<T> getTableType();
 
     List<Long> getIds();
 }

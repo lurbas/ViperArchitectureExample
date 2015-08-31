@@ -30,11 +30,6 @@ public class SearchPresenterImpl extends BasePresenter<SearchInteractor, SearchV
         return new SearchInteractorImpl();
     }
 
-//    @Override
-//    public void getSearchHistory() {
-//
-//    }
-
     @Override
     public void search(String query) {
         if (queryCounter.getAndIncrement() == 0) {
@@ -46,8 +41,8 @@ public class SearchPresenterImpl extends BasePresenter<SearchInteractor, SearchV
     }
 
     @Override
-    public void showItemList(boolean success, List<SearchItem> itemList) {
-        if (queryCounter.decrementAndGet() == 0) {
+    public void showItemList(boolean success, List<SearchItem> itemList, boolean isRequested) {
+        if (isRequested && queryCounter.decrementAndGet() == 0) {
             if (getView() != null) {
                 getView().showProgressIndicator(false);
             }

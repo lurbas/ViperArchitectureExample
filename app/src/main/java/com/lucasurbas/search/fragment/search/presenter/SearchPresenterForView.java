@@ -8,7 +8,5 @@ import com.lucasurbas.search.fragment.search.view.SearchView;
  */
 public interface SearchPresenterForView extends PresenterForView<SearchView>{
 
-    //void getSearchHistory();
-
     void search(String query);
 }

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by lucas.urbas on 31/08/15.
  */
-public interface Db {
+public interface Database {
 
     void reset();
 

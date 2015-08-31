@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.lucasurbas.search.db.Database;
+import com.lucasurbas.search.db.DatabaseORMLite;
+import com.lucasurbas.search.db.ORMLiteHelper;
 import com.lucasurbas.search.fragment.detail.DetailFragment;
 import com.lucasurbas.search.fragment.detail.interactor.DetailInteractorImpl;
 import com.lucasurbas.search.fragment.search.interactor.SearchInteractorImpl;
@@ -82,5 +85,17 @@ public class InjectionModule {
 //        client.setCache(new Cache(applicationContext.getCacheDir(), 10 * 1024 * 1024));
 //        client.networkInterceptors().add(interceptor);
         return client;
+    }
+
+    @Provides
+    @Singleton
+    ORMLiteHelper providesDatabaseHelper(Context context){
+        return new ORMLiteHelper(context);
+    }
+
+    @Provides
+    @Singleton
+    Database providesDatabase(ORMLiteHelper helper){
+        return new DatabaseORMLite(helper);
     }
 }

@@ -8,7 +8,5 @@ import com.lucasurbas.search.fragment.search.presenter.SearchPresenterForInterac
  */
 public interface SearchInteractor extends Interactor<SearchPresenterForInteractor> {
 
-    //void getSearchHistory();
-
     void search(String query);
 }

@@ -4,9 +4,11 @@ import android.util.Log;
 
 import com.lucasurbas.search.App;
 import com.lucasurbas.search.architecture.BaseInteractor;
-import com.lucasurbas.search.db.Db;
+import com.lucasurbas.search.db.Database;
 import com.lucasurbas.search.fragment.detail.presenter.DetailPresenterForInteractor;
 import com.lucasurbas.search.model.SearchItem;
+
+import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Observer;
@@ -21,7 +23,8 @@ public class DetailInteractorImpl extends BaseInteractor<DetailPresenterForInter
 
     private static final String TAG = DetailInteractorImpl.class.getSimpleName();
 
-    Db database;
+    @Inject
+    Database database;
 
     public DetailInteractorImpl(){
         App.getObjectGraph().inject(this);

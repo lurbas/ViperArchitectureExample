@@ -6,4 +6,5 @@ package com.lucasurbas.search.constant;
 public class Field {
 
     public static final String ID = "ID";
+    public static final String ORDER = "ORDER";
 }

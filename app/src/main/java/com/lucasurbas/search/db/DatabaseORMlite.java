@@ -1,6 +1,6 @@
 package com.lucasurbas.search.db;
 
-import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.lucasurbas.search.constant.Field;
 import com.lucasurbas.search.model.IdProvider;
 
@@ -13,16 +13,16 @@ import java.util.concurrent.Callable;
 /**
  * Created by lucas.urbas on 31/08/15.
  */
-public class DatabaseManager implements Db {
+public class DatabaseORMLite implements Database {
 
-    private static final String TAG = DatabaseManager.class.getSimpleName();
+    private static final String TAG = DatabaseORMLite.class.getSimpleName();
 
-    private DatabseHelper helper;
+    private ORMLiteHelper helper;
     private List<OnTableChangedListener> listenerList;
 
-    public DatabaseManager(DatabseHelper helper) {
+    public DatabaseORMLite(ORMLiteHelper helper) {
         this.helper = helper;
-        listenerList = Collections.synchronizedList(new ArrayList());
+        listenerList = Collections.synchronizedList(new ArrayList<OnTableChangedListener>());
     }
 
     @Override
@@ -37,7 +37,9 @@ public class DatabaseManager implements Db {
 
     @Override
     public void removeOnTableChangedListener(OnTableChangedListener listener) {
-        listenerList.remove(listener);
+        if(listener != null) {
+            listenerList.remove(listener);
+        }
     }
 
     @Override
@@ -53,8 +55,10 @@ public class DatabaseManager implements Db {
     @Override
     public <T> List<T> getItemList(Class<T> type, List<Long> idList) {
         try {
-            PreparedQuery<T> query = helper.getCustomDao(type).queryBuilder().where().in(Field.ID, idList).prepare();
-            return helper.getCustomDao(type).query(query);
+            QueryBuilder<T, Long> query = helper.getCustomDao(type).queryBuilder();
+            query.where().in(Field.ID, idList);
+            query.orderBy(Field.ORDER, true);
+            return helper.getCustomDao(type).query(query.prepare());
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

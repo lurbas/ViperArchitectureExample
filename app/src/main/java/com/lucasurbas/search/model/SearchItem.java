@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import com.lucasurbas.search.constant.Field;
 
 /**
  * Created by Lucas on 30/08/15.
@@ -30,8 +31,11 @@ public class SearchItem implements Parcelable, IdProvider {
     @DatabaseField()
     private boolean isVisited;
 
+    @DatabaseField(columnName = Field.ORDER)
+    private int order;
+
     public SearchItem() {
-        // for ormlite
+        // for ORMLite
     }
 
     protected SearchItem(Parcel in) {
@@ -99,6 +103,10 @@ public class SearchItem implements Parcelable, IdProvider {
         this.isVisited = isVisited;
     }
 
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -112,6 +120,7 @@ public class SearchItem implements Parcelable, IdProvider {
         out.writeString(webUrl);
         out.writeByte((byte) (isFavourite ? 1 : 0));
         out.writeByte((byte) (isVisited ? 1 : 0));
+        out.writeInt(order);
     }
 
     private void readFromParcel(Parcel in){
@@ -121,5 +130,6 @@ public class SearchItem implements Parcelable, IdProvider {
         webUrl = in.readString();
         isFavourite = in.readByte() != 0;
         isVisited = in.readByte() != 0;
+        order = in.readInt();
     }
 }
