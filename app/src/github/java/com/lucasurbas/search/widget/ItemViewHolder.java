@@ -69,7 +69,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
         itemContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(DetailActivity.getStartIntent(context, searchItem));
+                EventBus.getDefault().post(new OpenDetailScreenEvent(searchItem));
             }
         });
     }

@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.github.florent37.picassopalette.BitmapPalette;
 import com.github.florent37.picassopalette.PicassoPalette;
 import com.lucasurbas.search.App;
-import com.lucasurbas.search.DetailActivity;
 import com.lucasurbas.search.R;
+import com.lucasurbas.search.event.OpenDetailScreenEvent;
 import com.lucasurbas.search.model.SearchItem;
 import com.squareup.picasso.Picasso;
 
@@ -20,6 +20,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by Lucas on 30/08/15.
@@ -93,7 +94,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
         itemContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(DetailActivity.getStartIntent(context, searchItem));
+                EventBus.getDefault().post(new OpenDetailScreenEvent(searchItem));
             }
         });
     }

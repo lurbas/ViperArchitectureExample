@@ -57,12 +57,13 @@ public class SearchPresenterImpl extends BasePresenter<SearchInteractor, SearchV
                 getView().showProgressIndicator(false);
             }
         }
+        if (getView() != null) {
+            getView().setInfoText(EMPTY);
+        }
         if (getView() != null && success) {
             getView().showItemList(itemList);
             if (itemList.size() <= 0) {
                 getView().setInfoText(context.getString(R.string.t_no_items));
-            } else {
-                getView().setInfoText(EMPTY);
             }
         } else if (getView() != null) {
             getView().showError(context.getString(R.string.error_connection));

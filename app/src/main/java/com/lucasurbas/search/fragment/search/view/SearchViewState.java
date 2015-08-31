@@ -51,7 +51,9 @@ public class SearchViewState implements RestoreableViewState<SearchView> {
     }
 
     public void setItemList(List<SearchItem> itemList) {
-        this.searchItemList = new ArrayList<>(itemList);
+        if(itemList != null) {
+            this.searchItemList = new ArrayList<>(itemList);
+        }
     }
 
     public void setInfoText(String infoText) {
