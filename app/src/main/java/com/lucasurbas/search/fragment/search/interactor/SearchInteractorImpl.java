@@ -2,16 +2,15 @@ package com.lucasurbas.search.fragment.search.interactor;
 
 import android.util.Log;
 
-import com.lucasurbas.search.App;
 import com.lucasurbas.search.architecture.BaseInteractor;
+import com.lucasurbas.search.db.Db;
+import com.lucasurbas.search.db.OnTableChangedListener;
 import com.lucasurbas.search.fragment.search.presenter.SearchPresenterForInteractor;
 import com.lucasurbas.search.model.SearchItem;
 import com.lucasurbas.search.model.SearchItemsProvider;
 import com.lucasurbas.search.request.SearchApiProxy;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -23,10 +22,11 @@ import rx.schedulers.Schedulers;
  */
 public class SearchInteractorImpl extends BaseInteractor<SearchPresenterForInteractor> implements SearchInteractor {
 
+    private SearchApiProxy searchApiProxy;
+    private OnTableChangedListener onTableChangedListener;
     private static final String TAG = SearchInteractorImpl.class.getSimpleName();
 
-    SearchApiProxy searchApiProxy;
-
+    private Db database;
 
 //    @Override
 //    public void getSearchHistory() {
@@ -34,7 +34,6 @@ public class SearchInteractorImpl extends BaseInteractor<SearchPresenterForInter
 //    }
 
     public SearchInteractorImpl() {
-        App.getObjectGraph().inject(this);
         searchApiProxy = new SearchApiProxy();
     }
 
@@ -71,14 +70,24 @@ public class SearchInteractorImpl extends BaseInteractor<SearchPresenterForInter
             new Func1<SearchItemsProvider, List<SearchItem>>() {
                 @Override
                 public List<SearchItem> call(SearchItemsProvider provider) {
-                    List<SearchItem> rawResult = provider.getSearchItems();
-                    List<SearchItem> fromDatabase = database.getAllSearchItems(rawResult);
-                    Log.v(TAG, "fromDatabase size: " + fromDatabase.size());
-                    List<SearchItem> updatedResult =  update(rawResult, fromDatabase);
-                    database.createOrUpdate(updatedResult);
-                    return updatedResult;
+                    List<SearchItem> itemsFromApi = provider.getSearchItems();
+                    List<Long> idList = extractIdList(itemsFromApi);
+
+                    List<SearchItem> itemsFromDb = database.getItemList(SearchItem.class, idList);
+
+                    List<SearchItem> itemsUpdated = update(itemsFromApi, itemsFromDb);
+
+                    database.createOrUpdateItemList(SearchItem.class, itemsUpdated);
+
+                    return itemsUpdated;
                 }
             };
+
+
+    private List<Long> extractIdList(List<SearchItem> itemsFromApi) {
+        return null;
+    }
+
 
     private List<SearchItem> update(List<SearchItem> rawResult, List<SearchItem> fromDb) {
         for(SearchItem searchItem : rawResult){

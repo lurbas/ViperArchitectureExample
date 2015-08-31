@@ -4,11 +4,9 @@ import android.util.Log;
 
 import com.lucasurbas.search.App;
 import com.lucasurbas.search.architecture.BaseInteractor;
-import com.lucasurbas.search.db.Database;
+import com.lucasurbas.search.db.Db;
 import com.lucasurbas.search.fragment.detail.presenter.DetailPresenterForInteractor;
 import com.lucasurbas.search.model.SearchItem;
-
-import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Observer;
@@ -23,8 +21,7 @@ public class DetailInteractorImpl extends BaseInteractor<DetailPresenterForInter
 
     private static final String TAG = DetailInteractorImpl.class.getSimpleName();
 
-    @Inject
-    Database database;
+    Db database;
 
     public DetailInteractorImpl(){
         App.getObjectGraph().inject(this);
@@ -92,7 +89,7 @@ public class DetailInteractorImpl extends BaseInteractor<DetailPresenterForInter
             new Func1<SearchItem, SearchItem>() {
                 @Override
                 public SearchItem call(SearchItem searchItem) {
-                    database.updateSearchItem(searchItem);
+                    database.createOrUpdateItem(SearchItem.class, searchItem);
                     return searchItem;
                 }
             };
