@@ -17,12 +17,21 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class SearchPresenterImpl extends BasePresenter<SearchInteractor, SearchView> implements SearchPresenterForView, SearchPresenterForInteractor {
 
+    private static final String EMPTY = "";
+
     private AtomicInteger queryCounter;
     private Context context;
 
     public SearchPresenterImpl(Context context) {
         this.context = context;
         this.queryCounter = new AtomicInteger();
+    }
+
+    @Override
+    public void init() {
+        if (getView() != null) {
+            getView().setInfoText(context.getString(R.string.t_welcome));
+        }
     }
 
     @Override
@@ -35,6 +44,7 @@ public class SearchPresenterImpl extends BasePresenter<SearchInteractor, SearchV
         if (queryCounter.getAndIncrement() == 0) {
             if (getView() != null) {
                 getView().showProgressIndicator(true);
+                getView().setInfoText(EMPTY);
             }
         }
         getInteractor().search(query);
@@ -49,6 +59,11 @@ public class SearchPresenterImpl extends BasePresenter<SearchInteractor, SearchV
         }
         if (getView() != null && success) {
             getView().showItemList(itemList);
+            if (itemList.size() <= 0) {
+                getView().setInfoText(context.getString(R.string.t_no_items));
+            } else {
+                getView().setInfoText(EMPTY);
+            }
         } else if (getView() != null) {
             getView().showError(context.getString(R.string.error_connection));
         }

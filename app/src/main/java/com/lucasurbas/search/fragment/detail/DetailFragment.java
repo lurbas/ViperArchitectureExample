@@ -80,7 +80,7 @@ public class DetailFragment extends BaseFragment<DetailView, DetailPresenterForV
 
     private void setupToolbar() {
         ViewCompat.setElevation(toolbar, Util.pxFromDp(getActivity(), 4));
-        toolbar.setTitle(R.string.app_name);
+        toolbar.setTitle(R.string.t_screen_details);
         toolbar.inflateMenu(R.menu.menu_detail);
         Menu menu = toolbar.getMenu();
         MenuItem searchItem = menu.findItem(R.id.action_web);

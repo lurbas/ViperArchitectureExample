@@ -3,17 +3,13 @@ package com.lucasurbas.search.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 /**
  * Created by Lucas on 29/08/15.
  */
-public class Photo extends RealmObject {
+public class Photo {
 
     @Expose
     @SerializedName("id")
-    @PrimaryKey
     private long id;
 
     @Expose

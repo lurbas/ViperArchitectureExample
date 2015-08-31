@@ -6,5 +6,9 @@
 
     <string name="error_connection">Connection Error</string>
     <string name="t_no_desc">No description</string>
+    <string name="t_no_items">No items</string>
+    <string name="t_welcome">Welcome!\nStart searching</string>
+
+    <string name="t_screen_details">Details</string>
 
 </resources>

@@ -53,6 +53,13 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
         } else {
             ivFavourite.setVisibility(View.GONE);
         }
+        if (searchItem.isVisited()) {
+            ivAvatar.setAlpha(0.33f);
+            tvLogin.setAlpha(0.33f);
+        } else {
+            ivAvatar.setAlpha(1f);
+            tvLogin.setAlpha(1f);
+        }
         picasso.load(searchItem.getImageUrl())
                 .fit()
                 .placeholder(R.drawable.placeholder_avatar)

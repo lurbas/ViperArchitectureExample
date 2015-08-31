@@ -16,4 +16,6 @@ public interface SearchView extends View {
     void showProgressIndicator(boolean show);
 
     void showError(String message);
+
+    void setInfoText(String text);
 }

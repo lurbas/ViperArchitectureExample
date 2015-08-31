@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
@@ -42,6 +43,9 @@ public class SearchFragment extends BaseFragment<SearchView, SearchPresenterForV
 
     @Bind(R.id.rv_search_result)
     RecyclerView rvSearchResult;
+
+    @Bind(R.id.tv_info)
+    TextView tvInfo;
 
     private ItemsAdapter adapter;
 
@@ -103,7 +107,7 @@ public class SearchFragment extends BaseFragment<SearchView, SearchPresenterForV
 
     @Override
     public void onNewViewStateInstance() {
-        //nothing on first run. Wait for user search input.
+        getPresenter().init();
     }
 
     @Override
@@ -126,5 +130,11 @@ public class SearchFragment extends BaseFragment<SearchView, SearchPresenterForV
     @Override
     public void showError(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setInfoText(String text) {
+        ((SearchViewState) getViewState()).setInfoText(text);
+        tvInfo.setText(text);
     }
 }

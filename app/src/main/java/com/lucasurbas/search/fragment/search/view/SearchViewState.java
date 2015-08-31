@@ -15,14 +15,17 @@ public class SearchViewState implements RestoreableViewState<SearchView> {
 
     private final String KEY_ITEMS = "key_items";
     private final String KEY_SEARCHING = "key_searching";
+    private final String KEY_INFO_TEXT = "key_info_text";
 
     private ArrayList<SearchItem> searchItemList;
     private boolean isSearching;
+    private String infoText;
 
     @Override
     public void saveInstanceState(Bundle out) {
         out.putBoolean(KEY_SEARCHING, isSearching);
         out.putParcelableArrayList(KEY_ITEMS, searchItemList);
+        out.putString(KEY_INFO_TEXT, infoText);
     }
 
     @Override
@@ -30,8 +33,9 @@ public class SearchViewState implements RestoreableViewState<SearchView> {
         if (in == null) {
             return null;
         }
-        isSearching = in.getBoolean(KEY_SEARCHING, false);
-        searchItemList = in.getParcelableArrayList(KEY_ITEMS);
+        this.isSearching = in.getBoolean(KEY_SEARCHING, false);
+        this.searchItemList = in.getParcelableArrayList(KEY_ITEMS);
+        this.infoText = in.getString(KEY_INFO_TEXT);
         return this;
     }
 
@@ -39,6 +43,7 @@ public class SearchViewState implements RestoreableViewState<SearchView> {
     public void apply(SearchView view, boolean b) {
         view.showProgressIndicator(isSearching);
         view.showItemList(searchItemList);
+        view.setInfoText(infoText);
     }
 
     public void setSearching(boolean isSearching) {
@@ -47,5 +52,9 @@ public class SearchViewState implements RestoreableViewState<SearchView> {
 
     public void setItemList(List<SearchItem> itemList) {
         this.searchItemList = new ArrayList<>(itemList);
+    }
+
+    public void setInfoText(String infoText) {
+        this.infoText = infoText;
     }
 }

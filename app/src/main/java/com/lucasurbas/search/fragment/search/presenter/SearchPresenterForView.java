@@ -8,5 +8,7 @@ import com.lucasurbas.search.fragment.search.view.SearchView;
  */
 public interface SearchPresenterForView extends PresenterForView<SearchView>{
 
+    void init();
+
     void search(String query);
 }

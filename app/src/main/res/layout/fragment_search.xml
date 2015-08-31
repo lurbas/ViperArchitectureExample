@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -8,12 +9,19 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary"/>
+        android:background="@color/primary" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="26sp"
+            tools:text="Welcome!" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_search_result"
@@ -24,9 +32,9 @@
             android:id="@+id/pi_searching"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="?attr/actionBarSize"
-            android:layout_gravity="center_horizontal"/>
+            android:visibility="gone" />
 
     </FrameLayout>
 

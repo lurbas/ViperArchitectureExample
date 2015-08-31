@@ -55,12 +55,19 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
     public void presentSearchItem(final Context context, final SearchItem searchItem) {
 
         tvDescription.setTextColor(context.getResources().getColor(R.color.toolbar_icon));
-        footer.setBackgroundColor(context.getResources().getColor(R.color.primary));
+        itemContainer.setBackgroundColor(context.getResources().getColor(R.color.primary));
         if (searchItem.isFavourite()) {
             ivFavourite.setVisibility(View.VISIBLE);
             DrawableCompat.setTint(ivFavourite.getDrawable(), context.getResources().getColor(R.color.toolbar_icon));
         } else {
             ivFavourite.setVisibility(View.GONE);
+        }
+        if (searchItem.isVisited()) {
+            ivPhoto.setAlpha(0.33f);
+            itemContainer.setAlpha(0.6f);
+        } else {
+            ivPhoto.setAlpha(1f);
+            itemContainer.setAlpha(1f);
         }
 
         picasso.load(searchItem.getImageUrl())
@@ -72,7 +79,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
                                     public void onPaletteLoaded(Palette palette) {
                                         Palette.Swatch swatch = palette.getDarkVibrantSwatch();
                                         if (swatch != null) {
-                                            footer.setBackgroundColor(swatch.getRgb());
+                                            itemContainer.setBackgroundColor(swatch.getRgb());
                                             tvDescription.setTextColor(swatch.getTitleTextColor());
                                             DrawableCompat.setTint(ivFavourite.getDrawable(), swatch.getTitleTextColor());
                                         }
