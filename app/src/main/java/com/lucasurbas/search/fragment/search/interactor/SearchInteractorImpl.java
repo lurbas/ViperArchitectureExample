@@ -1,5 +1,8 @@
 package com.lucasurbas.search.fragment.search.interactor;
 
+import android.util.Log;
+
+import com.lucasurbas.search.App;
 import com.lucasurbas.search.architecture.BaseInteractor;
 import com.lucasurbas.search.fragment.search.presenter.SearchPresenterForInteractor;
 import com.lucasurbas.search.model.SearchItem;
@@ -7,6 +10,8 @@ import com.lucasurbas.search.model.SearchItemsProvider;
 import com.lucasurbas.search.request.SearchApiProxy;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -18,7 +23,10 @@ import rx.schedulers.Schedulers;
  */
 public class SearchInteractorImpl extends BaseInteractor<SearchPresenterForInteractor> implements SearchInteractor {
 
+    private static final String TAG = SearchInteractorImpl.class.getSimpleName();
+
     SearchApiProxy searchApiProxy;
+
 
 //    @Override
 //    public void getSearchHistory() {
@@ -26,6 +34,7 @@ public class SearchInteractorImpl extends BaseInteractor<SearchPresenterForInter
 //    }
 
     public SearchInteractorImpl() {
+        App.getObjectGraph().inject(this);
         searchApiProxy = new SearchApiProxy();
     }
 
@@ -43,6 +52,7 @@ public class SearchInteractorImpl extends BaseInteractor<SearchPresenterForInter
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.v(TAG, "Error: " + e.getMessage());
                         if (isPresenterSubscribed()) {
                             getPresenter().showItemList(false, null);
                         }
@@ -61,8 +71,25 @@ public class SearchInteractorImpl extends BaseInteractor<SearchPresenterForInter
             new Func1<SearchItemsProvider, List<SearchItem>>() {
                 @Override
                 public List<SearchItem> call(SearchItemsProvider provider) {
-
-                    return provider.getSearchItems();
+                    List<SearchItem> rawResult = provider.getSearchItems();
+                    List<SearchItem> fromDatabase = database.getAllSearchItems(rawResult);
+                    Log.v(TAG, "fromDatabase size: " + fromDatabase.size());
+                    List<SearchItem> updatedResult =  update(rawResult, fromDatabase);
+                    database.createOrUpdate(updatedResult);
+                    return updatedResult;
                 }
             };
+
+    private List<SearchItem> update(List<SearchItem> rawResult, List<SearchItem> fromDb) {
+        for(SearchItem searchItem : rawResult){
+            for(SearchItem searchItemFromDb : fromDb){
+                if(searchItem.getId() == searchItemFromDb.getId()){
+                    searchItem.setIsFavourite(searchItemFromDb.isFavourite());
+                    searchItem.setIsVisited(searchItemFromDb.isVisited());
+                    break;
+                }
+            }
+        }
+        return rawResult;
+    }
 }

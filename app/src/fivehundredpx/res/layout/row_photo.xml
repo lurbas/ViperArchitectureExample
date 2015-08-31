@@ -21,13 +21,29 @@
             app:ratioHeight="1"
             app:ratioWidth="1" />
 
-        <TextView
-            android:id="@+id/tv_desc"
+        <LinearLayout
+            android:id="@+id/footer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:singleLine="true"
-            tools:text="Description"
-            android:textSize="16sp" />
+            android:layout_height="48dp">
+
+            <TextView
+                android:id="@+id/tv_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:singleLine="true"
+                android:textSize="16sp"
+                tools:text="Description" />
+
+            <ImageView
+                android:id="@+id/iv_favourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/ic_star_white_24dp" />
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

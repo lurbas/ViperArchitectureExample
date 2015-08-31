@@ -45,7 +45,7 @@ public class DetailPresenterImpl extends BasePresenter<DetailInteractor, DetailV
         if (getView() != null) {
             getView().showFavouriteState(searchItem.isFavourite());
         }
-        getInteractor().setFavourite(searchItem.getId(), searchItem.isFavourite());
+        getInteractor().setFavourite(searchItem, searchItem.isFavourite());
 
     }
 
@@ -59,14 +59,14 @@ public class DetailPresenterImpl extends BasePresenter<DetailInteractor, DetailV
     public void setVisited() {
         if (!searchItem.isVisited()) {
             searchItem.setIsVisited(true);
-            getInteractor().setVisited(searchItem.getId(), true);
+            getInteractor().setVisited(searchItem, true);
         }
     }
 
     @Override
     public void visitChanged(boolean isVisited, boolean success) {
         if (!success) {
-            searchItem.setIsFavourite(isVisited);
+            searchItem.setIsVisited(isVisited);
             Log.e(TAG, "visitChanged Error");
         }
     }

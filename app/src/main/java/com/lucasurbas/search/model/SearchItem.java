@@ -1,14 +1,10 @@
 package com.lucasurbas.search.model;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 /**
  * Created by Lucas on 30/08/15.
  */
-public class SearchItem extends RealmObject{
+public class SearchItem {
 
-    @PrimaryKey
     private long id;
 
     private String title;
