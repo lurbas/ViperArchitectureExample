@@ -2,14 +2,11 @@ package com.lucasurbas.search.widget;
 
 import android.content.Context;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.florent37.picassopalette.BitmapPalette;
-import com.github.florent37.picassopalette.PicassoPalette;
 import com.lucasurbas.search.App;
 import com.lucasurbas.search.R;
 import com.lucasurbas.search.event.OpenDetailScreenEvent;
@@ -73,20 +70,21 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 
         picasso.load(searchItem.getImageUrl())
                 .fit()
-                .into(ivPhoto,
-                        PicassoPalette.with(searchItem.getImageUrl(), ivPhoto)
-                                .intoCallBack(new BitmapPalette.CallBack() {
-                                    @Override
-                                    public void onPaletteLoaded(Palette palette) {
-                                        Palette.Swatch swatch = palette.getDarkVibrantSwatch();
-                                        if (swatch != null) {
-                                            itemContainer.setBackgroundColor(swatch.getRgb());
-                                            tvDescription.setTextColor(swatch.getTitleTextColor());
-                                            DrawableCompat.setTint(ivFavourite.getDrawable(), swatch.getTitleTextColor());
-                                        }
-                                    }
-                                })
-                );
+                .into(ivPhoto);
+//                ,
+//                        PicassoPalette.with(searchItem.getImageUrl(), ivPhoto)
+//                                .intoCallBack(new BitmapPalette.CallBack() {
+//                                    @Override
+//                                    public void onPaletteLoaded(Palette palette) {
+//                                        Palette.Swatch swatch = palette.getDarkVibrantSwatch();
+//                                        if (swatch != null) {
+//                                            itemContainer.setBackgroundColor(swatch.getRgb());
+//                                            tvDescription.setTextColor(swatch.getTitleTextColor());
+//                                            DrawableCompat.setTint(ivFavourite.getDrawable(), swatch.getTitleTextColor());
+//                                        }
+//                                    }
+//                                })
+//                );
 
         String title = searchItem.getTitle();
         tvDescription.setText(title == null || title.isEmpty() ? context.getString(R.string.t_no_desc) : title);

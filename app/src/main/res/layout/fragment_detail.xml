@@ -9,11 +9,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary" />
+        android:background="@color/background"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/primary">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -32,7 +33,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv_image"
-                android:background="@color/primary"
                 android:minHeight="200dp"
                 android:paddingBottom="16dp"
                 android:paddingTop="36dp"

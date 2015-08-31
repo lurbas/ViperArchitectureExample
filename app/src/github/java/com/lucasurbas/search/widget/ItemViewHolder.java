@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lucasurbas.search.App;
-import com.lucasurbas.search.DetailActivity;
 import com.lucasurbas.search.R;
+import com.lucasurbas.search.event.OpenDetailScreenEvent;
 import com.lucasurbas.search.model.SearchItem;
 import com.squareup.picasso.Picasso;
 
@@ -17,6 +17,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by Lucas on 30/08/15.

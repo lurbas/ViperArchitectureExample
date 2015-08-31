@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 
 import com.lucasurbas.search.architecture.BaseActivity;
 import com.lucasurbas.search.event.OpenDetailScreenEvent;
+import com.lucasurbas.search.fragment.detail.DetailFragment;
 import com.lucasurbas.search.fragment.search.SearchFragment;
 
 import de.greenrobot.event.EventBus;
@@ -14,10 +15,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
             Fragment fragment = SearchFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_master, fragment).commit();
         }
     }
 
@@ -34,6 +36,11 @@ public class MainActivity extends BaseActivity {
     }
 
     public void onEvent(OpenDetailScreenEvent event) {
-        startActivity(DetailActivity.getStartIntent(this, event.getSearchItem()));
+        if (findViewById(R.id.container_detail) == null) {
+            startActivity(DetailActivity.getStartIntent(this, event.getSearchItem()));
+        } else {
+            Fragment fragment = DetailFragment.newInstance(event.getSearchItem());
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_detail, fragment).commit();
+        }
     }
 }
