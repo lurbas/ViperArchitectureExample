@@ -51,4 +51,5 @@ dependencies {
     compile 'io.realm:realm-android:0.82.1'
     compile 'com.github.florent37:picassopalette:1.0.2@aar'
     compile 'com.makeramen:roundedimageview:2.2.0'
+    compile 'com.j256.ormlite:ormlite-android:4.48'
 }

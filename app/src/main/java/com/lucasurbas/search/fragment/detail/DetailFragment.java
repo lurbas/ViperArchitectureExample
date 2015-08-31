@@ -24,7 +24,6 @@ import com.lucasurbas.search.fragment.detail.presenter.DetailPresenterImpl;
 import com.lucasurbas.search.fragment.detail.view.DetailView;
 import com.lucasurbas.search.fragment.detail.view.DetailViewState;
 import com.lucasurbas.search.model.SearchItem;
-import com.lucasurbas.search.model.SearchItemParcel;
 import com.lucasurbas.search.util.Util;
 import com.squareup.picasso.Picasso;
 
@@ -56,10 +55,10 @@ public class DetailFragment extends BaseFragment<DetailView, DetailPresenterForV
     FloatingActionButton fabFavourite;
 
 
-    public static Fragment newInstance(SearchItemParcel searchItemParcel) {
+    public static Fragment newInstance(SearchItem searchItem) {
         Fragment fragment = new DetailFragment();
         Bundle b = new Bundle();
-        b.putParcelable(KEY_SEARCH_ITEM, searchItemParcel);
+        b.putParcelable(KEY_SEARCH_ITEM, searchItem);
         fragment.setArguments(b);
         return fragment;
     }
@@ -118,8 +117,8 @@ public class DetailFragment extends BaseFragment<DetailView, DetailPresenterForV
 
     @Override
     public void onNewViewStateInstance() {
-        SearchItemParcel searchItemParcel = getArguments().getParcelable(KEY_SEARCH_ITEM);
-        getPresenter().initSearchItem(searchItemParcel.getSearchItem());
+        SearchItem searchItem = getArguments().getParcelable(KEY_SEARCH_ITEM);
+        getPresenter().initSearchItem(searchItem);
         getPresenter().setVisited();
     }
 

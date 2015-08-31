@@ -1,6 +1,8 @@
 package com.lucasurbas.search.fragment.search.interactor;
 
 import com.lucasurbas.search.architecture.BaseInteractor;
+import com.lucasurbas.search.db.Db;
+import com.lucasurbas.search.db.OnTableChangedListener;
 import com.lucasurbas.search.fragment.search.presenter.SearchPresenterForInteractor;
 import com.lucasurbas.search.model.SearchItem;
 import com.lucasurbas.search.model.SearchItemsProvider;
@@ -18,7 +20,10 @@ import rx.schedulers.Schedulers;
  */
 public class SearchInteractorImpl extends BaseInteractor<SearchPresenterForInteractor> implements SearchInteractor {
 
-    SearchApiProxy searchApiProxy;
+    private SearchApiProxy searchApiProxy;
+    private OnTableChangedListener onTableChangedListener;
+
+    private Db database;
 
 //    @Override
 //    public void getSearchHistory() {
@@ -61,8 +66,25 @@ public class SearchInteractorImpl extends BaseInteractor<SearchPresenterForInter
             new Func1<SearchItemsProvider, List<SearchItem>>() {
                 @Override
                 public List<SearchItem> call(SearchItemsProvider provider) {
+                    List<SearchItem> itemsFromApi = provider.getSearchItems();
+                    List<Long> idList = extractIdList(itemsFromApi);
 
-                    return provider.getSearchItems();
+                    List<SearchItem> itemsFromDb = database.getItemList(SearchItem.class, idList);
+
+                    List<SearchItem> itemsUpdated = update(itemsFromApi, itemsFromDb);
+
+                    database.createOrUpdateItemList(SearchItem.class, itemsUpdated);
+
+                    return itemsUpdated;
                 }
             };
+
+
+    private List<Long> extractIdList(List<SearchItem> itemsFromApi) {
+        return null;
+    }
+
+    private List<SearchItem> update(List<SearchItem> itemsFromApi, List<SearchItem> itemsFromDb) {
+        return null;
+    }
 }

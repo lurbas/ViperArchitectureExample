@@ -11,7 +11,6 @@ import com.lucasurbas.search.App;
 import com.lucasurbas.search.DetailActivity;
 import com.lucasurbas.search.R;
 import com.lucasurbas.search.model.SearchItem;
-import com.lucasurbas.search.model.SearchItemParcel;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -62,7 +61,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
         itemContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(DetailActivity.getStartIntent(context, new SearchItemParcel(searchItem)));
+                context.startActivity(DetailActivity.getStartIntent(context, searchItem));
             }
         });
     }

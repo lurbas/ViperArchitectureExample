@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.RestoreableViewState;
 import com.lucasurbas.search.model.SearchItem;
-import com.lucasurbas.search.model.SearchItemParcel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +16,13 @@ public class SearchViewState implements RestoreableViewState<SearchView> {
     private final String KEY_ITEMS = "key_items";
     private final String KEY_SEARCHING = "key_searching";
 
-    private ArrayList<SearchItemParcel> searchItemParcelList;
+    private ArrayList<SearchItem> searchItemList;
     private boolean isSearching;
 
     @Override
     public void saveInstanceState(Bundle out) {
         out.putBoolean(KEY_SEARCHING, isSearching);
-        out.putParcelableArrayList(KEY_ITEMS, searchItemParcelList);
+        out.putParcelableArrayList(KEY_ITEMS, searchItemList);
     }
 
     @Override
@@ -32,18 +31,14 @@ public class SearchViewState implements RestoreableViewState<SearchView> {
             return null;
         }
         isSearching = in.getBoolean(KEY_SEARCHING, false);
-        searchItemParcelList = in.getParcelableArrayList(KEY_ITEMS);
+        searchItemList = in.getParcelableArrayList(KEY_ITEMS);
         return this;
     }
 
     @Override
     public void apply(SearchView view, boolean b) {
         view.showProgressIndicator(isSearching);
-        List<SearchItem> itemList = new ArrayList<>();
-        for(SearchItemParcel searchItemParcel : searchItemParcelList){
-            itemList.add(searchItemParcel.getSearchItem());
-        }
-        view.showItemList(itemList);
+        view.showItemList(searchItemList);
     }
 
     public void setSearching(boolean isSearching) {
@@ -51,10 +46,6 @@ public class SearchViewState implements RestoreableViewState<SearchView> {
     }
 
     public void setItemList(List<SearchItem> itemList) {
-        this.searchItemParcelList = new ArrayList<>();
-        for(SearchItem item : itemList){
-            SearchItemParcel searchItemParcel = new SearchItemParcel(item);
-            searchItemParcelList.add(searchItemParcel);
-        }
+        this.searchItemList = new ArrayList<>(itemList);
     }
 }
