@@ -12,4 +12,6 @@
     <string name="t_screen_details">Details</string>
     <string name="t_logo">LOGO</string>
 
+    <string name="t_best_result">Best Match</string>
+
 </resources>

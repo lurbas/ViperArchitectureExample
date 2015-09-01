@@ -40,6 +40,8 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
     TextView tvDescription;
     @Bind(R.id.iv_favourite)
     ImageView ivFavourite;
+    @Bind(R.id.tv_best_result)
+    TextView tvBestResult;
 
     public ItemViewHolder(View view) {
         super(view);
@@ -51,7 +53,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
         return R.layout.row_photo;
     }
 
-    public void presentSearchItem(final Context context, final SearchItem searchItem) {
+    public void presentSearchItem(final Context context, final SearchItem searchItem, boolean bestResult) {
 
         tvDescription.setTextColor(context.getResources().getColor(R.color.toolbar_icon));
         itemContainer.setBackgroundColor(context.getResources().getColor(R.color.primary));
@@ -74,6 +76,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
             ivPhoto.setAlpha(1f);
             itemContainer.setAlpha(1f);
         }
+        tvBestResult.setVisibility(bestResult ? View.VISIBLE : View.GONE);
 
         picasso.load(searchItem.getImageUrl())
                 .fit()

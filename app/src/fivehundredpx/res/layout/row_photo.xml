@@ -5,8 +5,8 @@
     android:id="@+id/item_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
     android:background="@color/primary"
+    android:clickable="true"
     android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
@@ -14,13 +14,33 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.lucasurbas.search.widget.FixedRatioImageView
-            android:id="@+id/iv_image"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            app:ratioHeight="1"
-            app:ratioWidth="1" />
+            android:layout_height="wrap_content">
+
+            <com.lucasurbas.search.widget.FixedRatioImageView
+                android:id="@+id/iv_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:ratioHeight="1"
+                app:ratioWidth="1" />
+
+            <TextView
+                android:id="@+id/tv_best_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:singleLine="true"
+                android:textSize="16sp"
+                android:alpha="0.8"
+                android:textColor="@color/primary_dark"
+                android:background="@color/accent"
+                android:text="@string/t_best_result"
+                android:visibility="gone"/>
+
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/footer"

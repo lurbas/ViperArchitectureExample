@@ -35,7 +35,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     public void onBindViewHolder(final ItemViewHolder holder, final int position) {
 
         final SearchItem searchItem = searchItems.get(position);
-        holder.presentSearchItem(context, searchItem);
+        boolean bestResult = position == 0;
+        holder.presentSearchItem(context, searchItem, bestResult);
     }
 
     public void setItems(List<SearchItem> itemList) {

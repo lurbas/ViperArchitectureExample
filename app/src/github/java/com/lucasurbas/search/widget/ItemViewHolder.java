@@ -36,6 +36,8 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
     TextView tvLogin;
     @Bind(R.id.iv_favourite)
     ImageView ivFavourite;
+    @Bind(R.id.tv_best_result)
+    TextView tvBestResult;
 
     public ItemViewHolder(View view) {
         super(view);
@@ -47,7 +49,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
         return R.layout.row_user;
     }
 
-    public void presentSearchItem(final Context context, final SearchItem searchItem) {
+    public void presentSearchItem(final Context context, final SearchItem searchItem, boolean bestResult) {
 
         if (searchItem.isFavourite()) {
             ivFavourite.setVisibility(View.VISIBLE);
@@ -68,6 +70,8 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
             ivAvatar.setAlpha(1f);
             tvLogin.setAlpha(1f);
         }
+        tvBestResult.setVisibility(bestResult ? View.VISIBLE : View.GONE);
+
         picasso.load(searchItem.getImageUrl())
                 .fit()
                 .placeholder(R.drawable.placeholder_avatar)
