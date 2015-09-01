@@ -2,7 +2,9 @@ package com.lucasurbas.search.dagger;
 
 import com.google.gson.Gson;
 import com.lucasurbas.search.constant.Url;
+import com.lucasurbas.search.fragment.search.interactor.SearchInteractorImpl;
 import com.lucasurbas.search.request.FiveHundredPxApi;
+import com.lucasurbas.search.request.SearchApi;
 import com.lucasurbas.search.request.SearchApiProxy;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -22,14 +24,12 @@ import retrofit.converter.GsonConverter;
         library = true,
 
         injects = {
-                SearchApiProxy.class
-
+                SearchInteractorImpl.class
         }
 )
 public class ApiModule {
 
     @Provides
-    @Singleton
     FiveHundredPxApi providesApi(Gson gson, OkHttpClient client) {
 
         RestAdapter restAdapter = new RestAdapter.Builder().setClient(new OkClient(client))
@@ -39,5 +39,11 @@ public class ApiModule {
                 .build();
 
         return restAdapter.create(FiveHundredPxApi.class);
+    }
+
+    @Provides
+    @Singleton
+    SearchApi providesSearchApi(FiveHundredPxApi fiveHundredPxApi){
+        return new SearchApiProxy(fiveHundredPxApi);
     }
 }

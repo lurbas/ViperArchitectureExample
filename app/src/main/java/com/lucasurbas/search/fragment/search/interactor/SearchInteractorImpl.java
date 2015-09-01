@@ -9,7 +9,7 @@ import com.lucasurbas.search.db.OnTableChangedListener;
 import com.lucasurbas.search.fragment.search.presenter.SearchPresenterForInteractor;
 import com.lucasurbas.search.model.SearchItem;
 import com.lucasurbas.search.model.SearchItemsProvider;
-import com.lucasurbas.search.request.SearchApiProxy;
+import com.lucasurbas.search.request.SearchApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +27,10 @@ import rx.schedulers.Schedulers;
  */
 public class SearchInteractorImpl extends BaseInteractor<SearchPresenterForInteractor> implements SearchInteractor {
 
-    private SearchApiProxy searchApiProxy;
     private static final String TAG = SearchInteractorImpl.class.getSimpleName();
 
+    @Inject
+    SearchApi searchApi;
     @Inject
     Database database;
 
@@ -55,12 +56,11 @@ public class SearchInteractorImpl extends BaseInteractor<SearchPresenterForInter
 
     public SearchInteractorImpl() {
         App.getObjectGraph().inject(this);
-        searchApiProxy = new SearchApiProxy();
     }
 
     @Override
     public void search(String query) {
-        searchApiProxy.query(query)
+        searchApi.query(query)
                 .map(UPDATE_IN_DB)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -95,14 +95,11 @@ public class SearchInteractorImpl extends BaseInteractor<SearchPresenterForInter
 
                     List<SearchItem> itemsFromApi = provider.getSearchItems();
                     ids = extractIdList(itemsFromApi);
-
                     List<SearchItem> itemsFromDb = database.getItemList(SearchItem.class, ids);
                     List<SearchItem> itemsUpdated = update(itemsFromApi, itemsFromDb);
-
                     database.createOrUpdateItemList(SearchItem.class, itemsUpdated);
 
                     database.addOnTableChangedListener(onTableChangedListener);
-
                     return itemsUpdated;
                 }
             };

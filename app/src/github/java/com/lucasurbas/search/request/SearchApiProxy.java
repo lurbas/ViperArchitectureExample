@@ -1,9 +1,6 @@
 package com.lucasurbas.search.request;
 
-import com.lucasurbas.search.App;
 import com.lucasurbas.search.model.SearchItemsProvider;
-
-import javax.inject.Inject;
 
 import rx.Observable;
 
@@ -12,11 +9,10 @@ import rx.Observable;
  */
 public class SearchApiProxy implements SearchApi {
 
-    @Inject
-    GithubApi githubApi;
+    private GithubApi githubApi;
 
-    public SearchApiProxy() {
-        App.getObjectGraph().inject(this);
+    public SearchApiProxy(GithubApi githubApi) {
+        this.githubApi = githubApi;
     }
 
     @Override

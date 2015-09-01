@@ -140,8 +140,12 @@ public class DetailFragment extends BaseFragment<DetailView, DetailPresenterForV
     public void showFavouriteState(boolean isFavourite) {
         ((DetailViewState) getViewState()).setFavourite(isFavourite);
         int resId = isFavourite ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp;
-        Drawable d = getResources().getDrawable(resId);
-        DrawableCompat.setTint(d, getResources().getColor(R.color.toolbar_icon));
-        fabFavourite.setImageDrawable(d);
+
+        final Drawable originalDrawable = getResources().getDrawable(resId);
+        final Drawable wrappedDrawable = DrawableCompat.wrap(originalDrawable);
+
+        int color = getResources().getColor(R.color.toolbar_icon);
+        DrawableCompat.setTint(wrappedDrawable, color);
+        fabFavourite.setImageDrawable(wrappedDrawable);
     }
 }

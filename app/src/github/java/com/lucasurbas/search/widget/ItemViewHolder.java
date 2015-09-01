@@ -1,6 +1,7 @@
 package com.lucasurbas.search.widget;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -50,7 +51,13 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 
         if (searchItem.isFavourite()) {
             ivFavourite.setVisibility(View.VISIBLE);
-            DrawableCompat.setTint(ivFavourite.getDrawable(), context.getResources().getColor(R.color.toolbar_icon));
+
+            final Drawable originalDrawable = ivFavourite.getDrawable();
+            final Drawable wrappedDrawable = DrawableCompat.wrap(originalDrawable);
+
+            int color = context.getResources().getColor(R.color.toolbar_icon);
+            DrawableCompat.setTint(wrappedDrawable, color);
+            ivFavourite.setImageDrawable(wrappedDrawable);
         } else {
             ivFavourite.setVisibility(View.GONE);
         }

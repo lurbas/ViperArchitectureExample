@@ -1,10 +1,7 @@
 package com.lucasurbas.search.request;
 
-import com.lucasurbas.search.App;
 import com.lucasurbas.search.constant.Url;
 import com.lucasurbas.search.model.SearchItemsProvider;
-
-import javax.inject.Inject;
 
 import rx.Observable;
 
@@ -13,11 +10,10 @@ import rx.Observable;
  */
 public class SearchApiProxy implements SearchApi {
 
-    @Inject
-    FiveHundredPxApi fiveHundredPxApi;
+    private FiveHundredPxApi fiveHundredPxApi;
 
-    public SearchApiProxy() {
-        App.getObjectGraph().inject(this);
+    public SearchApiProxy(FiveHundredPxApi fiveHundredPxApi) {
+        this.fiveHundredPxApi = fiveHundredPxApi;
     }
 
     @Override
