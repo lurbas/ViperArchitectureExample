@@ -1,4 +1,6 @@
 # Search
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Search-blue.svg?style=flat)](http://android-arsenal.com/details/3/2448)
+
 viper architecture example
 
 This is example of application built with VIPER architecture. It's built on top of sockeqwe's [Mosby](https://github.com/sockeqwe/mosby).
