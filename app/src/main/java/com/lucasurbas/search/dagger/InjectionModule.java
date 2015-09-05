@@ -5,8 +5,8 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.lucasurbas.search.db.Database;
-import com.lucasurbas.search.db.DatabaseORMLite;
-import com.lucasurbas.search.db.ORMLiteHelper;
+import com.lucasurbas.search.db.HelperORMLite;
+import com.lucasurbas.search.db.ORMLiteDatabase;
 import com.lucasurbas.search.fragment.detail.DetailFragment;
 import com.lucasurbas.search.fragment.detail.interactor.DetailInteractorImpl;
 import com.lucasurbas.search.fragment.search.interactor.SearchInteractorImpl;
@@ -89,13 +89,13 @@ public class InjectionModule {
 
     @Provides
     @Singleton
-    ORMLiteHelper providesDatabaseHelper(Context context){
-        return new ORMLiteHelper(context);
+    HelperORMLite providesDatabaseHelper(Context context){
+        return new HelperORMLite(context);
     }
 
     @Provides
     @Singleton
-    Database providesDatabase(ORMLiteHelper helper){
-        return new DatabaseORMLite(helper);
+    Database providesDatabase(HelperORMLite helper){
+        return new ORMLiteDatabase(helper);
     }
 }

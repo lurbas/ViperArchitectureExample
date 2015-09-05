@@ -13,14 +13,14 @@ import java.util.concurrent.Callable;
 /**
  * Created by lucas.urbas on 31/08/15.
  */
-public class DatabaseORMLite implements Database {
+public class ORMLiteDatabase implements Database {
 
-    private static final String TAG = DatabaseORMLite.class.getSimpleName();
+    private static final String TAG = ORMLiteDatabase.class.getSimpleName();
 
-    private ORMLiteHelper helper;
+    private HelperORMLite helper;
     private List<OnTableChangedListener> listenerList;
 
-    public DatabaseORMLite(ORMLiteHelper helper) {
+    public ORMLiteDatabase(HelperORMLite helper) {
         this.helper = helper;
         listenerList = Collections.synchronizedList(new ArrayList<OnTableChangedListener>());
     }

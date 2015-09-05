@@ -14,12 +14,12 @@ import java.sql.SQLException;
 /**
  * Created by lucas.urbas on 31/08/15.
  */
-public class ORMLiteHelper extends OrmLiteSqliteOpenHelper {
+public class HelperORMLite extends OrmLiteSqliteOpenHelper {
 
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "database";
 
-    public ORMLiteHelper(Context context) {
+    public HelperORMLite(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
 
