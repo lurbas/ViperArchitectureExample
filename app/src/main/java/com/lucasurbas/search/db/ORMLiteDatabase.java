@@ -17,10 +17,10 @@ public class ORMLiteDatabase implements Database {
 
     private static final String TAG = ORMLiteDatabase.class.getSimpleName();
 
-    private HelperORMLite helper;
+    private ORMLiteHelper helper;
     private List<OnTableChangedListener> listenerList;
 
-    public ORMLiteDatabase(HelperORMLite helper) {
+    public ORMLiteDatabase(ORMLiteHelper helper) {
         this.helper = helper;
         listenerList = Collections.synchronizedList(new ArrayList<OnTableChangedListener>());
     }
