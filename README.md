@@ -1,7 +1,7 @@
 # Search
 viper architecture example
 
-This is example of application build with VIPER architecture. It's build on top of sockeqwe's [Mosby](https://github.com/sockeqwe/mosby).
+This is example of application build with VIPER architecture. It's built on top of sockeqwe's [Mosby](https://github.com/sockeqwe/mosby).
 
 ### Diagram
 
