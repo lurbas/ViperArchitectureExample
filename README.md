@@ -1,3 +1,5 @@
+[![Android Gems](http://www.android-gems.com/badge/lurbas/Search.svg?branch=master)](http://www.android-gems.com/lib/lurbas/Search)
+
 # Search
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Search-blue.svg?style=flat)](http://android-arsenal.com/details/3/2448)
 
